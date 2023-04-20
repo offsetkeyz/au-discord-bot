@@ -29,12 +29,12 @@ async def todos(ctx):
         code = f.read()
     todos = []
     for line in code.split('\n'):
-        if "TODO" in line:
+        if "#TODO" in line:
             todos.append(line.strip())
     if todos:
         i = 1
         for todo in todos:
-            embed.add_field(name=f"Idea {i}", value=todo)
+            embed.add_field(name=f"Idea {i}", value=todo, inline=False)
             i=i+1
         await ctx.respond(embed=embed)
     else:
