@@ -35,7 +35,7 @@ async def todos(ctx):
         i = 1
         for todo in todos:
             todo_stripped = todo.replace("#TODO","",1)
-            embed.add_field(name=f"Idea {i}", value=todo, inline=False)
+            embed.add_field(name=f"Idea {i}", value=todo_stripped, inline=False)
             i=i+1
         await ctx.respond(embed=embed)
     else:
