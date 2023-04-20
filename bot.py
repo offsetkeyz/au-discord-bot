@@ -14,14 +14,14 @@ async def on_ready():
 async def hello(ctx):
     await ctx.respond("Hey!")
     
-@bot.slash_command(name = "Contribute", description = "Run this command for more information on how to contribute to the bot.")
+@bot.slash_command(name = "contribute", description = "Run this command for more information on how to contribute to the bot.")
 async def contribute(ctx):
     await ctx.respond("""
                       In order to contribute to the bot, head over to github.com/offsetkeyz/au-discord-bot and follow the instructions there.\n
                       If you need ideas for contributions, run the command /todos
                       """)
 
-@bot.slash_command(name = "todo", description = "Say hello to the bot") 
+@bot.slash_command(name = "todo", description = "Get ideas for contributions") 
 async def todos(ctx):
     with open('bot.py') as f:
         code = f.read()
