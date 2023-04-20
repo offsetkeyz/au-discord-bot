@@ -9,7 +9,6 @@ bot = commands.Bot()
 async def on_ready():
     status_task.start()
     print(f"{bot.user} is ready and online!")
-    await bot.tree.sync()
     
 @bot.slash_command(name = "hello", description = "Say hello to the bot")
 async def hello(ctx):
