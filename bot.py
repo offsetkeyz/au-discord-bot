@@ -29,7 +29,7 @@ async def todos(ctx):
         code = f.read()
     todos = []
     for line in code.split('\n'):
-        if "#TODO " in line and not line.startswith('if'):
+        if "#TODO " in line and not line.strip().startswith('if'):
             todos.append(line.strip())
     if todos:
         i = 1
