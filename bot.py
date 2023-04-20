@@ -18,7 +18,7 @@ async def status_task() -> None:
     """
     Setup the game status task of the bot
     """
-    statuses = ["seeking contributors!"]
+    statuses = ["seeking contributors!", "please contribute!"]
     await bot.change_presence(activity=discord.Game(random.choice(statuses)))
             
 with open('config.json') as f:
