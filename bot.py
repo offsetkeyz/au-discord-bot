@@ -29,7 +29,7 @@ async def todos(ctx):
         code = f.read()
     todos = []
     for line in code.split('\n'):
-        if "#TODO" in line:
+        if "#TODO " in line:
             todos.append(line.strip())
     if todos:
         i = 1
@@ -53,4 +53,7 @@ with open('config.json') as f:
     
 TOKEN = config['token']
 bot.run(TOKEN)
-    
+   
+   
+   
+#TODO Create an RSS reader for different feeds in CS
