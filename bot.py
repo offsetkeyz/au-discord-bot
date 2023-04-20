@@ -1,5 +1,4 @@
 from asyncio import tasks
-import os
 import random
 import discord
 import json
@@ -15,7 +14,7 @@ async def on_ready():
 async def hello(ctx):
     await ctx.respond("Hey!")
 
-@tasks.loop(minutes=1.0)
+# @tasks.loop(minutes=1.0)
 async def status_task() -> None:
     """
     Setup the game status task of the bot
