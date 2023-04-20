@@ -21,6 +21,20 @@ async def contribute(ctx):
                       If you need ideas for contributions, run the command /todos
                       """)
 
+@bot.slash_command(name = "todo", description = "Say hello to the bot") 
+async def todos(ctx):
+    with open('bot.py') as f:
+        code = f.read()
+    todos = []
+    for line in code.split('\n'):
+        if "TODO" in line:
+            todos.append(line.strip())
+    if todos:
+        todos_str = '\n'.join([f"- {todo}" for todo in todos])
+        await ctx.respond(f"Here are the TODOs for the bot: {todos_str}")
+    else:
+        await ctx.respond("No TODOs, but don't let that stop you!")
+
 @tasks.loop(minutes=1.0)
 async def status_task() -> None:
     """
