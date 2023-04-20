@@ -7,6 +7,7 @@ bot = commands.Bot()
 
 @bot.event
 async def on_ready():
+    status_task.start()
     print(f"{bot.user} is ready and online!")
     
 @bot.slash_command(name = "hello", description = "Say hello to the bot")
