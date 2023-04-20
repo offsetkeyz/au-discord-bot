@@ -36,7 +36,7 @@ async def todos(ctx):
         for todo in todos:
             embed.add_field(name=f"Idea {i}", value=todo)
             i=i+1
-        await ctx.respond(embed)
+        await ctx.respond(embed=embed)
     else:
         await ctx.respond("No TODOs, but don't let that stop you!")
 
