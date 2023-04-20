@@ -13,6 +13,13 @@ async def on_ready():
 @bot.slash_command(name = "hello", description = "Say hello to the bot")
 async def hello(ctx):
     await ctx.respond("Hey!")
+    
+@bot.slash_command(name = "Contribute", description = "Run this command for more information on how to contribute to the bot.")
+async def contribute(ctx):
+    await ctx.respond("""
+                      In order to contribute to the bot, head over to github.com/offsetkeyz/au-discord-bot and follow the instructions there.\n
+                      If you need ideas for contributions, run the command /todos
+                      """)
 
 @tasks.loop(minutes=1.0)
 async def status_task() -> None:
