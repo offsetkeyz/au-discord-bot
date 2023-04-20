@@ -2,6 +2,7 @@ import random
 import discord
 import json
 from discord.ext import commands, tasks
+from discord import Embed
 
 bot = commands.Bot()
 
@@ -23,6 +24,7 @@ async def contribute(ctx):
 
 @bot.slash_command(name = "todo", description = "Get ideas for contributions") 
 async def todos(ctx):
+    embed = Embed(title="Ideas for Contributions")
     with open('bot.py') as f:
         code = f.read()
     todos = []
@@ -30,8 +32,11 @@ async def todos(ctx):
         if "TODO" in line:
             todos.append(line.strip())
     if todos:
-        todos_str = '\n'.join([f"- {todo}" for todo in todos])
-        await ctx.respond(f"Here are the TODOs for the bot: {todos_str}")
+        i = 1
+        for todo in todos:
+            embed.add_field(name=f"Idea {i}", value=todo)
+            i=i+1
+        await ctx.respond(embed)
     else:
         await ctx.respond("No TODOs, but don't let that stop you!")
 
