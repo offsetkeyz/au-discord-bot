@@ -19,7 +19,7 @@ async def hello(ctx):
 async def contribute(ctx):
     embed = Embed(title="How you can contribute", description="This will provide you with all the info you need to contribute to the bot")
     embed.add_field(name="How?", value="Head over to github and read the README. This will explain everything you need to know.", inline=False)
-    embed.add_field(name="Ideas" value = "If you are looking for ideas to contribute, run the command /todo")
+    embed.add_field(name="Ideas", value = "If you are looking for ideas to contribute, run the command /todo")
     embed.url = "https://github.com/offsetkeyz/au-discord-bot"
     await ctx.respond(embed=embed)
     
