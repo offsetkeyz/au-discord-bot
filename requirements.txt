@@ -2,3 +2,4 @@ asyncio
 py-cord
 pytest
 embedchain
+os

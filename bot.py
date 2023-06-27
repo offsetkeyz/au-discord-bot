@@ -3,8 +3,12 @@ import discord
 import json
 from discord.ext import commands, tasks
 from discord import Embed
+import os
 
 bot = commands.Bot()
+
+aubie_chat_bot = App()
+aubie_chat_bot.add("web_page", "https://bulletin.auburn.edu/undergraduate/samuelginncollegeofengineering/departmentofcomputerscienceandsoftwareengineering/bachelorofcomputerscience_major/")
 
 @bot.event
 async def on_ready():
@@ -41,6 +45,12 @@ async def todo(ctx):
         await ctx.respond(embed=embed)
     else:
         await ctx.respond("No TODOs, but don't let that stop you!")
+        
+@bot.slash_command(name = "ask_aubie", description = "Ask Aubie anything about the program!") 
+async def todo(ctx, message: discord.Message):
+    embed = Embed(title="Ideas for Contributions")
+    embed.add_field(name=message, value=aubie_chat_bot.query(message))
+    await ctx.respond(embed=embed)
 
 @tasks.loop(minutes=1.0)
 async def status_task() -> None:
@@ -53,6 +63,8 @@ async def status_task() -> None:
 with open('config.json') as f:
     config = json.load(f)
     
+os.environ["OPENAI_API_KEY"] = config['openai']
+from embedchain import App
 TOKEN = config['token']
 bot.run(TOKEN)
    
