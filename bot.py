@@ -3,6 +3,8 @@ import discord
 import json
 from discord.ext import commands, tasks
 from discord import Embed
+from discord.commands import Option
+import openai
 
 bot = commands.Bot()
 
@@ -14,6 +16,20 @@ async def on_ready():
 @bot.slash_command(name = "hello", description = "Say hello to the bot")
 async def hello(ctx):
     await ctx.respond("Hey!")
+    
+@bot.slash_command(name = "ask_aubie", description="Ask Aubie Anything!")
+async def ask_aubie(ctx, message: Option(str)):
+    embed = Embed(title="Ask Aubie")
+    response = openai.Completion.create(
+            engine="text-davinci-002",
+            prompt=message,
+            max_tokens=600,
+            n=1,
+            stop=None,
+            temperature=0.5
+        )
+    embed.add_field(name=message, value=response.choices[0].text.strip())
+    await ctx.respond(embed=embed)
     
 @bot.slash_command(name = "contribute", description = "Run this command for more information on how to contribute to the bot.")
 async def contribute(ctx):
@@ -54,6 +70,10 @@ with open('config.json') as f:
     config = json.load(f)
     
 TOKEN = config['token']
+
+openai.api_key = config['openai']
+openai.organization = config['organization']
+
 bot.run(TOKEN)
    
    
