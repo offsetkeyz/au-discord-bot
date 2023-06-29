@@ -18,18 +18,22 @@ async def hello(ctx):
     await ctx.respond("Hey!")
     
 @bot.slash_command(name = "ask_aubie", description="Ask Aubie Anything!")
-async def ask_aubie(ctx, message: Option(str)):
-    embed = Embed(title="Ask Aubie")
+async def ask_aubie(ctx: discord.ApplicationContext, message: Option(str)):
+    await ctx.respond(f"You asked: '{message}'")
     response = openai.Completion.create(
             engine="text-davinci-003",
             prompt=message,
-            max_tokens=600,
+            max_tokens=100,
             n=1,
             stop=None,
             temperature=0.5
         )
-    embed.add_field(name=message, value=response.choices[0].text.strip())
-    await ctx.respond(embed=embed)
+    embed = Embed(title=f"{message}", description=response)
+
+    try:
+        await ctx.respond(embed=embed)
+    except Exception as f:
+        print(f'F {f}')
     
 @bot.slash_command(name = "contribute", description = "Run this command for more information on how to contribute to the bot.")
 async def contribute(ctx):

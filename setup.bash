@@ -1,0 +1,1 @@
+source bot_venv/bin/activate
